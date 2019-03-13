@@ -31,8 +31,19 @@ if (! require(vegan, quietly=TRUE)) {
 
 ---- 
 
-## 3 How to manipulate statistical visualization 
+## 3 What this tool provides
 
 
+#### Choosing which PC values you want to use on the y-axis
+
+The drop down bar on the side panel allows for the choice between PC2 or PC3 (with PC2 as default) for the biplot with PC1.
+
+#### Range restriction of the PC values 
+
+The 2 slider toggles proceeding, allow restriction of the PC ranges. 
+
+#### Zoom 
+
+The last slider toggle allows for zooming up to the (0,0) coordinates. 
     
 ---- 
