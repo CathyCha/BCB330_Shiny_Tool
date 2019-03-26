@@ -45,5 +45,9 @@ The 2 slider toggles proceeding, allow restriction of the PC ranges.
 #### Zoom 
 
 The last slider toggle allows for zooming up to the (0,0) coordinates. 
+
+#### Summary of output
+
+A brief summary of the input values for the output plot.
     
 ---- 
