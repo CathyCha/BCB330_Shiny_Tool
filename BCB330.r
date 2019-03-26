@@ -40,8 +40,31 @@ server <- function(input, output) {
 	})
 
 	output$description <- renderText(
-	  {"This output is based on the pca plots done on the dune and dune.env data provided by the vegan package in R"} 
+	  {"This output is based on the pca analysis done on the dune data provided by the vegan package in R."}
 	)
+	
+	output$info <- renderText({
+	  toStr <- function(x) {
+	    if(is.null(x)) return("NULL\n")
+	    paste0("PC1 with PC", x, "\n")
+	  }
+	  rangeToStr <- function(x) {
+	    if(is.null(x)) return("NULL\n")
+	    paste0("(", x[1], ", ", x[2], ")", "\n")
+	  }
+	  viewPlane <- function(x) {
+	    if(is.null(x)) return("NULL\n")
+	    paste0("xlim = ", "(", x, ",", x, ")", "    ",
+	           "ylim =", "(", x, ",", x, ")")
+	  }
+	
+  	paste0(
+  	  "PC plot of interest: ", toStr(input$PCy),
+  	  "PC1 range restriction: ", rangeToStr(input$rangePC1),
+  	  "PC of interest range restriction: ", rangeToStr(input$rangePC2),
+  	  "Plane of view: ", viewPlane(input$Zoom)
+  	)
+	})
 }
 
 #Define the overall UI
@@ -58,10 +81,10 @@ ui <- fluidPage(
       #PC1 and PC2 sliders 
       sliderInput("rangePC1", 
                   label = "Range of interest PC1:",
-                  min = -2, max = 2, value = c(-2, 2), step = 0.01),
+                  min = -0.5, max = 0.5, value = c(-2, 2), step = 0.01),
       sliderInput("rangePC2", 
                   label = "Range of interest PC on y axis:",
-                  min = -2, max = 2, value = c(-2, 2), step = 0.01), 
+                  min = -0.6, max = 0.6, value = c(-2, 2), step = 0.01), 
       sliderInput("Zoom", 
                   label = "Zoom",
                   min = 0.01, max = 0.5, value = 0.5, step = 0.01), 
@@ -70,9 +93,9 @@ ui <- fluidPage(
     #space for the plot
     mainPanel(
       fluidRow(
-        plotOutput("pcaplot"),
-        verbatimTextOutput("info")
-      )
+        plotOutput("pcaplot")
+      ),
+      verbatimTextOutput("info")
     )
   )
 )
